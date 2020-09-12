@@ -11,6 +11,13 @@ class FVueRouter {
         // 监听事件
         window.addEventListener('hashchange', this.onHashChange.bind(this))
         window.addEventListener('load', this.onHashChange(this))
+
+        
+        // 缓存path和route映射关系
+        // this.routeMap = {}
+        // this.$options.routes.forEach(route => {
+        //     this.routeMap[route.path] = route
+        // })
     }
 
     onHashChange() {
@@ -53,10 +60,13 @@ FVueRouter.install = function(_Vue) {
             const current = this.$router.current
             const route = routes.find(route => route.path === current)
             const comp = route ? route.component : null
+            // const { routeMap, current } = this.$router
+            // const component = routeMap[current] ? routeMap[current].component : null;
             // 获取路由表
             return h(comp)
         }
     })
+
 }
 
 
